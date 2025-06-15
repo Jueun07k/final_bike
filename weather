@@ -1,0 +1,10 @@
+import pandas as pd
+
+# 예시: df_weather 예시 컬럼: ['날짜', '최고기온', '최저기온', '강수량']
+df_weather['날짜'] = pd.to_datetime(df_weather['날짜']).dt.strftime('%Y-%m-%d')
+
+# 따릉이 데이터 날짜 컬럼도 맞춰주기
+df_bike['날짜'] = pd.to_datetime(df_bike['대여일시']).dt.strftime('%Y-%m-%d')
+
+# 날짜 기준으로 병합
+weatherbike = pd.merge(df_bike, df_weather, on='날짜', how='left')
