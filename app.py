@@ -72,7 +72,7 @@ with tab2:
     fig2, ax2 = plt.subplots(figsize=(12, 6))
     ax2.set_xlabel('일')
     ax2.set_ylabel('대여 건수', color='blue')
-    ax2.plot(daily_data['날짜'], daily_data['대여 건수'], color='blue')
+    ax2.plot(daily_data['날짜'], daily_data['대여 건수'], color='blue', label='대여 건수')
     ax2.tick_params(axis='y', labelcolor='blue')
     ax2.xaxis.set_major_locator(mdates.DayLocator())
     ax2.xaxis.set_major_formatter(mdates.DateFormatter('%d'))
@@ -81,7 +81,9 @@ with tab2:
 
     ax3 = ax2.twinx()
     ax3.set_ylabel('일강수량 (mm)', color='green')
-    ax3.plot(daily_data['날짜'], daily_data['일강수량'], color='green')
+
+    # ✅ 선 → 점으로 변경
+    ax3.scatter(daily_data['날짜'], daily_data['일강수량'], color='green', label='일강수량', s=40)
     ax3.tick_params(axis='y', labelcolor='green')
 
     plt.title("일별 대여 건수와 강수량 비교")
