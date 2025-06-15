@@ -2,21 +2,12 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import matplotlib.font_manager as fm
 import matplotlib as mpl
-import os
 
-# ✅ NanumGothic 폰트 설정
-FONT_PATH = os.path.join(os.path.dirname(__file__), 'NanumGothic.ttf')
+# 한글 폰트 설정 관련 코드 삭제
 
-if os.path.exists(FONT_PATH):
-    font_prop = fm.FontProperties(fname=FONT_PATH)
-    mpl.rcParams['font.family'] = font_prop.get_name()
-    st.write("✅ 한글 폰트 로드 성공:", font_prop.get_name())
-else:
-    st.warning("⚠️ 'NanumGothic.ttf' 파일이 없습니다. 기본 폰트를 사용합니다.")
+mpl.rcParams['axes.unicode_minus'] = False  # 마이너스 표시 문제 방지
 
-mpl.rcParams['axes.unicode_minus'] = False
 # 📌 페이지 타이틀
 st.title('🚲 서울시 따릉이 및 날씨 데이터 분석')
 
