@@ -3,12 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+import matplotlib
 
-# ✅ 한글 폰트 설정
-matplotlib.rcParams['font.family'] = 'NanumGothic'  # 또는 'Malgun Gothic'
+# ✅ 한글 폰트 설정 (Cloud 환경에서도 잘 작동)
+matplotlib.rcParams['font.family'] = 'NanumGothic'
+matplotlib.rcParams['axes.unicode_minus'] = False  # 음수 깨짐 방지
 
 # 🔒 마이너한 오류 방지용
 matplotlib.rcParams['axes.unicode_minus'] = False
