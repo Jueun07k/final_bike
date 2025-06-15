@@ -13,7 +13,7 @@ df = load_data()
 # 🔹 '일(day)'만 추출해서 새로운 컬럼 만들기
 df['일'] = df['날짜'].dt.day
 
-st.subheader("📅 날짜별 대여량 (일자 기준)"
+st.subheader("📅 날짜별 대여량 (일자 기준)")
              
 fig, ax = plt.subplots(figsize=(12, 6))  # 🔸 가로(width)=12, 세로(height)=6
 ax.plot(df['일'], df['대여 건수'], color='green', marker='o')
