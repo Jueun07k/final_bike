@@ -1,10 +1,21 @@
+import streamlit as st
+import matplotlib.pyplot as plt
 import pandas as pd
 
-# 예시: df_weather 예시 컬럼: ['날짜', '최고기온', '최저기온', '강수량']
-df_weather['날짜'] = pd.to_datetime(df_weather['날짜']).dt.strftime('%Y-%m-%d')
+st.title('🚲 따릉이 대여량과 날씨 분석')
 
-# 따릉이 데이터 날짜 컬럼도 맞춰주기
-df_bike['날짜'] = pd.to_datetime(df_bike['대여일시']).dt.strftime('%Y-%m-%d')
+st.write(daily_data.head())
 
-# 날짜 기준으로 병합
-weatherbike = pd.merge(df_bike, df_weather, on='날짜', how='left')
+fig, ax1 = plt.subplots(figsize=(12,6))
+
+ax1.set_xlabel('날짜')
+ax1.set_ylabel('대여 건수', color='blue')
+ax1.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], color='blue', label='대여 건수')
+
+ax2 = ax1.twinx()
+ax2.set_ylabel('일강수량 (mm)', color='green')
+ax2.plot(pd.to_datetime(daily_data['날짜']), daily_data['일강수량'], color='green', label='일강수량')
+
+plt.title('날짜별 대여 건수와 일강수량 비교')
+
+st.pyplot(fig)
