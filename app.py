@@ -3,6 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
+# 한글 폰트 설정 (예: Windows 환경)
+mpl.rc('font', family='Malgun Gothic')
+mpl.rcParams['axes.unicode_minus'] = False
+
 # 📌 페이지 타이틀
 st.title('🚲 서울시 따릉이 및 날씨 데이터 분석')
 
