@@ -1,0 +1,19 @@
+# 예: df_bike에 '대여일시' datetime, df_weather에 '날짜', '시간', '온도' 등 컬럼 있다고 가정
+
+# 날짜와 시간 분리 후 병합 준비
+df_bike['날짜'] = pd.to_datetime(df_bike['대여일시']).dt.date
+df_bike['시간'] = pd.to_datetime(df_bike['대여일시']).dt.hour
+
+# df_weather도 날짜(datetime.date), 시간(hour) 맞춰준 후
+merged_df = pd.merge(df_bike, df_weather, how='left', on=['날짜', '시간'])
+
+# 상관관계 계산
+corr = merged_df[['대여건수', '온도', '강수량']].corr()
+print(corr)
+
+# 예: 온도와 대여건수 관계 시각화
+plt.scatter(merged_df['온도'], merged_df['대여건수'])
+plt.xlabel('온도(°C)')
+plt.ylabel('대여 건수')
+plt.title('온도와 따릉이 대여량 상관관계')
+plt.show()
