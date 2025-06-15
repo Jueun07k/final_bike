@@ -4,14 +4,19 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.font_manager as fm
 import matplotlib as mpl
+import os
 
+# ✅ NanumGothic 폰트를 프로젝트 내에서 직접 로드
+FONT_PATH = os.path.join(os.path.dirname(__file__), 'NanumGothic.ttf')
 
-# ✅ Windows에서 한글 폰트 설정 (Malgun Gothic)
-font_path = "C:/Windows/Fonts/malgun.ttf"
-fontprop = fm.FontProperties(fname=font_path)
-mpl.rc('font', family=fontprop.get_name())
+if os.path.exists(FONT_PATH):
+    fontprop = fm.FontProperties(fname=FONT_PATH)
+    mpl.rc('font', family=fontprop.get_name())
+    st.write("✅ 한글 폰트 로드 성공: ", fontprop.get_name())
+else:
+    st.warning("⚠️ 'NanumGothic.ttf' 파일이 없습니다. 기본 폰트를 사용합니다.")
+
 mpl.rcParams['axes.unicode_minus'] = False
-
 # 📌 페이지 타이틀
 st.title('🚲 서울시 따릉이 및 날씨 데이터 분석')
 
