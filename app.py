@@ -4,7 +4,16 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 import matplotlib.pyplot as plt
+import matimport matplotlib.pyplot as plt
+
+import matplotlib.font_manager as fm
 import matplotlib as mpl
+
+# ✅ Malgun Gothic 폰트 경로 직접 지정 (Windows 전용)
+font_path = "C:/Windows/Fonts/malgun.ttf"
+fontprop = fm.FontProperties(fname=font_path)
+mpl.rc('font', family=fontprop.get_name())
+mpl.rcParams['axes.unicode_minus'] = Falseplotlib as mpl
 
 # 한글 폰트 설정 (예: Windows 환경)
 mpl.rc('font', family='Malgun Gothic')
