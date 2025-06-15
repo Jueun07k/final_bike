@@ -6,13 +6,13 @@ import matplotlib.font_manager as fm
 import matplotlib as mpl
 import os
 
-# ✅ NanumGothic 폰트를 프로젝트 내에서 직접 로드
+# ✅ NanumGothic 폰트 설정
 FONT_PATH = os.path.join(os.path.dirname(__file__), 'NanumGothic.ttf')
 
 if os.path.exists(FONT_PATH):
-    fontprop = fm.FontProperties(fname=FONT_PATH)
-    mpl.rc('font', family=fontprop.get_name())
-    st.write("✅ 한글 폰트 로드 성공: ", fontprop.get_name())
+    font_prop = fm.FontProperties(fname=FONT_PATH)
+    mpl.rcParams['font.family'] = font_prop.get_name()
+    st.write("✅ 한글 폰트 로드 성공:", font_prop.get_name())
 else:
     st.warning("⚠️ 'NanumGothic.ttf' 파일이 없습니다. 기본 폰트를 사용합니다.")
 
