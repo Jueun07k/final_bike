@@ -19,27 +19,28 @@ def load_weather_data():
 bike_data = load_bike_data()
 weather_data = load_weather_data()
 
-# 날짜 포맷 맞추기
 bike_data['날짜'] = bike_data['날짜'].dt.strftime('%Y-%m-%d')
-
-# 병합
 daily_data = pd.merge(bike_data, weather_data, on='날짜', how='left')
 
-st.subheader("1️⃣ 날짜별 따릉이 대여량")
-fig1, ax1 = plt.subplots(figsize=(12,6))
-ax1.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], marker='o', color='blue')
-ax1.set_xlabel('날짜')
-ax1.set_ylabel('대여 건수', color='blue')
-ax1.grid(True)
-st.pyplot(fig1)
+tab1, tab2 = st.tabs(["따릉이 이용 현황", "날씨와 연동한 분석"])
 
-st.subheader("2️⃣ 날짜별 대여 건수와 일강수량 비교")
-fig2, ax2 = plt.subplots(figsize=(12,6))
-ax2.set_xlabel('날짜')
-ax2.set_ylabel('대여 건수', color='blue')
-ax2.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], color='blue', label='대여 건수')
-ax3 = ax2.twinx()
-ax3.set_ylabel('일강수량 (mm)', color='green')
-ax3.plot(pd.to_datetime(daily_data['날짜']), daily_data['일강수량'], color='green', label='일강수량')
-plt.title('날짜별 대여 건수와 일강수량 비교')
-st.pyplot(fig2)
+with tab1:
+    st.subheader("📅 날짜별 따릉이 대여량")
+    fig1, ax1 = plt.subplots(figsize=(12,6))
+    ax1.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], marker='o', color='blue')
+    ax1.set_xlabel('날짜')
+    ax1.set_ylabel('대여 건수', color='blue')
+    ax1.grid(True)
+    st.pyplot(fig1)
+
+with tab2:
+    st.subheader("📅 날짜별 대여 건수와 일강수량 비교")
+    fig2, ax2 = plt.subplots(figsize=(12,6))
+    ax2.set_xlabel('날짜')
+    ax2.set_ylabel('대여 건수', color='blue')
+    ax2.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], color='blue', label='대여 건수')
+    ax3 = ax2.twinx()
+    ax3.set_ylabel('일강수량 (mm)', color='green')
+    ax3.plot(pd.to_datetime(daily_data['날짜']), daily_data['일강수량'], color='green', label='일강수량')
+    plt.title('날짜별 대여 건수와 일강수량 비교')
+    st.pyplot(fig2)
