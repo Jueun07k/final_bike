@@ -2,24 +2,44 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.title("🚲 서울시 따릉이 이용 분석")
+st.title('🚲 서울시 따릉이 및 날씨 데이터 분석')
 
 @st.cache_data
-def load_data():
+def load_bike_data():
     return pd.read_csv('rental_counts_by_date.csv', parse_dates=['날짜'])
 
-df = load_data()
+@st.cache_data
+def load_weather_data():
+    df_weather = pd.read_csv('OBS_ASOS_DD_20250610143611 (1).csv', encoding='cp949')
+    df_weather = df_weather[['일시', '평균기온(°C)', '일강수량(mm)']]
+    df_weather.rename(columns={'일시': '날짜', '평균기온(°C)': '평균기온', '일강수량(mm)': '일강수량'}, inplace=True)
+    df_weather['날짜'] = pd.to_datetime(df_weather['날짜']).dt.strftime('%Y-%m-%d')
+    return df_weather
 
-# 🔹 '일(day)'만 추출해서 새로운 컬럼 만들기
-df['일'] = df['날짜'].dt.day
+bike_data = load_bike_data()
+weather_data = load_weather_data()
 
-st.subheader("📅 날짜별 대여량 (일자 기준)")
-             
-fig, ax = plt.subplots(figsize=(12, 6))  # 🔸 가로(width)=12, 세로(height)=6
-ax.plot(df['일'], df['대여 건수'], color='green', marker='o')
-ax.set_xlabel('일')
-ax.set_ylabel('대여 건수')
-ax.set_xticks(df['일'])  # 일 단위로 x축 표시
-ax.grid(True)
+# 날짜 포맷 맞추기
+bike_data['날짜'] = bike_data['날짜'].dt.strftime('%Y-%m-%d')
 
-st.pyplot(fig)
+# 병합
+daily_data = pd.merge(bike_data, weather_data, on='날짜', how='left')
+
+st.subheader("1️⃣ 날짜별 따릉이 대여량")
+fig1, ax1 = plt.subplots(figsize=(12,6))
+ax1.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], marker='o', color='blue')
+ax1.set_xlabel('날짜')
+ax1.set_ylabel('대여 건수', color='blue')
+ax1.grid(True)
+st.pyplot(fig1)
+
+st.subheader("2️⃣ 날짜별 대여 건수와 일강수량 비교")
+fig2, ax2 = plt.subplots(figsize=(12,6))
+ax2.set_xlabel('날짜')
+ax2.set_ylabel('대여 건수', color='blue')
+ax2.plot(pd.to_datetime(daily_data['날짜']), daily_data['대여 건수'], color='blue', label='대여 건수')
+ax3 = ax2.twinx()
+ax3.set_ylabel('일강수량 (mm)', color='green')
+ax3.plot(pd.to_datetime(daily_data['날짜']), daily_data['일강수량'], color='green', label='일강수량')
+plt.title('날짜별 대여 건수와 일강수량 비교')
+st.pyplot(fig2)
