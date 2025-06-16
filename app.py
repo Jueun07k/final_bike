@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 import matplotlib.font_manager as fm
 
 # ✅ 한글 폰트 설정
