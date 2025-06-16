@@ -5,10 +5,12 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import matplotlib.font_manager as fm
 
-# 한글 폰트 설정
-font_path = '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf'  # 경로는 환경에 따라 다를 수 있음
-fontprop = fm.FontProperties(fname=font_path, size=12)
+# ✅ 한글 폰트 설정
+font_path = './fonts/NanumBarunGothic.ttf'
+fontprop = fm.FontProperties(fname=font_path)
 mpl.rc('font', family=fontprop.get_name())
+mpl.rcParams['axes.unicode_minus'] = False
+
 # 📌 페이지 타이틀
 st.title('🚲 서울시 따릉이 및 날씨 데이터 분석')
 
