@@ -5,10 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import matplotlib.font_manager as fm
 
-# ✅ 한글 폰트 설정
-font_path = './fonts/NanumGothic.ttf'
-fontprop = fm.FontProperties(fname=font_path)
-mpl.rc('font', family=fontprop.get_name())
+mpl.rc('font', family='DejaVu Sans')
 mpl.rcParams['axes.unicode_minus'] = False
 
 # 📌 페이지 타이틀
