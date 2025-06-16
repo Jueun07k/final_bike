@@ -6,7 +6,7 @@ import matplotlib as mpl
 import matplotlib.font_manager as fm
 
 # ✅ 한글 폰트 설정
-font_path = './NanumBarunGothic.ttf'
+font_path = './NanumGothic.ttf'
 fontprop = fm.FontProperties(fname=font_path)
 mpl.rc('font', family=fontprop.get_name())
 mpl.rcParams['axes.unicode_minus'] = False
