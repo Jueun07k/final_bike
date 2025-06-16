@@ -1,13 +1,12 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
 import matplotlib as mpl
-
 import matplotlib.font_manager as fm
 
 # 한글 폰트 설정
-font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'  # 경로는 환경에 따라 다를 수 있음
+font_path = '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf'  # 경로는 환경에 따라 다를 수 있음
 fontprop = fm.FontProperties(fname=font_path, size=12)
 mpl.rc('font', family=fontprop.get_name())
 # 📌 페이지 타이틀
