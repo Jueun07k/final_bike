@@ -4,10 +4,12 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib as mpl
 
-# 한글 폰트 설정 관련 코드 삭제
+import matplotlib.font_manager as fm
 
-mpl.rcParams['axes.unicode_minus'] = False  # 마이너스 표시 문제 방지
-
+# 한글 폰트 설정
+font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'  # 경로는 환경에 따라 다를 수 있음
+fontprop = fm.FontProperties(fname=font_path, size=12)
+mpl.rc('font', family=fontprop.get_name())
 # 📌 페이지 타이틀
 st.title('🚲 서울시 따릉이 및 날씨 데이터 분석')
 
